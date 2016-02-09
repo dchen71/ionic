@@ -25,6 +25,16 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+  .state('app.home', {
+    url: '/home',
+    views: {
+      'mainContent': {
+        templateUrl: 'templates/home.html',
+          controller: 'IndexController'
+      }
+    }
+  })
+
     .state('app', {
     url: '/app',
     abstract: true,
