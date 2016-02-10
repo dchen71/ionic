@@ -25,6 +25,50 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
+.state('app', {
+    url: '/app',
+    abstract: true,
+    templateUrl: 'templates/sidebar.html',
+    controller: 'AppCtrl'
+  })
+
+  .state('app.aboutus', {
+      url: '/aboutus',
+      views: {
+        'mainContent': {
+          templateUrl: 'templates/aboutus.html'
+        }
+      }
+    })
+    .state('app.menu', {
+      url: '/',
+      views: {
+        'mainContent': {
+          templateUrl: 'templates/menu.html',
+          controller: ''
+        }
+      }
+    })
+
+  .state('app.dishdetails', {
+    url: '/menu/:id',
+    views: {
+      'mainContent': {
+        templateUrl: 'templates/dishdetails.html',
+        controller: ''
+      }
+    }
+  })
+
+  .state('app.contactus', {
+      url: '/contactus',
+      views: {
+        'mainContent': {
+          templateUrl: 'templates/contactus.html'
+        }
+      }
+    })
+
   .state('app.home', {
     url: '/home',
     views: {
@@ -33,6 +77,7 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
           controller: 'IndexController'
       }
     }
-  });
+  })
+  ;
 
 });
