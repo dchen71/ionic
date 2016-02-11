@@ -120,8 +120,8 @@ angular.module('conFusion.controllers', [])
         };
     }])
 
-    .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
-        
+    .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', function($scope, $stateParams, menuFactory, baseURL) {
+        $scope.baseURL = baseURL;    
         $scope.dish = {};
         $scope.showDish = false;
         $scope.message="Loading ...";
