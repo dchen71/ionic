@@ -71,8 +71,13 @@ angular.module('conFusion.controllers', [])
       };  
     })
 
-    .controller('MenuController', ['$scope', 'menuFactory', 'baseURL', function($scope, menuFactory, baseURL) {
-
+    .controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate', function ($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
+        $scope.addFavorite = function (index) {
+            console.log("index is " + index);
+            favoriteFactory.addToFavorites(index);
+            $ionicListDelegate.closeOptionButtons();
+        }
+        
         $scope.baseURL = baseURL;    
         $scope.tab = 1;
         $scope.filtText = '';
