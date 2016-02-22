@@ -193,7 +193,29 @@ angular.module('conFusion.controllers', [])
             favoriteFactory.addToFavorites($scope.dish.id);
             $scope.closeDetail();
         }
+
+        // Create the dish comment modal that we will use later
+        $ionicModal.fromTemplateUrl('templates/dish-comment.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.commentform = modal;
+        });
+
+        // Triggered in the dish comment modal to close it
+        $scope.closeDetail = function() {
+          $scope.commentform.hide();
+        };
+
+        // Open the dish comment modal
+        $scope.detailPopup = function() {
+          $scope.commentform.show();
+        };
         
+        // Adds comment to dish
+        $scope.addComment = function () {
+            favoriteFactory.addToFavorites($scope.dish.id);
+            $scope.closeDetail();
+        }
     }])
 
     .controller('DishCommentController', ['$scope', 'menuFactory', function($scope,menuFactory) {
@@ -206,7 +228,7 @@ angular.module('conFusion.controllers', [])
             console.log($scope.mycomment);
             
             $scope.dish.comments.push($scope.mycomment);
-    menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
+            menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
             
             $scope.commentForm.$setPristine();
             
