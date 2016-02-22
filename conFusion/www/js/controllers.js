@@ -154,7 +154,7 @@ angular.module('conFusion.controllers', [])
         };
     }])
 
-    .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', function($scope, $stateParams, menuFactory, baseURL) {
+    .controller('DishDetailController', ['$scope', '$stateParams', '$ionicModal', 'menuFactory', 'baseURL', function($scope, $stateParams, $ionicModal, menuFactory, baseURL) {
         $scope.baseURL = baseURL;    
         $scope.dish = {};
         $scope.showDish = false;
@@ -170,6 +170,23 @@ angular.module('conFusion.controllers', [])
                             $scope.message = "Error: "+response.status + " " + response.statusText;
                         }
         );
+
+        // Create the dish detail modal that we will use later
+        $ionicModal.fromTemplateUrl('templates/dish-detail-popover.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.detailform = modal;
+        });
+
+        // Triggered in the dish detail modal to close it
+        $scope.closeDetail = function() {
+          $scope.detailform.hide();
+        };
+
+        // Open the dish detail modal
+        $scope.detailPopup = function() {
+          $scope.detailform.show();
+        };
 
         
     }])
