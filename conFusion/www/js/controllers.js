@@ -216,8 +216,8 @@ angular.module('conFusion.controllers', [])
         
         // Adds comment to dish
         $scope.addComment = function () {
-            console.log($scope.dish.comments)
-            console.log($scope.comment)
+            $scope.comment.date = new Date().toISOString();
+            $scope.dish.comments.push($scope.comment);
             $scope.closeDetail();
             $scope.closeComment();
         }
