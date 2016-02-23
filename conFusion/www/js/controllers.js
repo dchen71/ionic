@@ -218,6 +218,7 @@ angular.module('conFusion.controllers', [])
         $scope.addComment = function () {
             $scope.comment.date = new Date().toISOString();
             $scope.dish.comments.push($scope.comment);
+            $scope.comment = {};
             $scope.closeDetail();
             $scope.closeComment();
         }
