@@ -194,6 +194,9 @@ angular.module('conFusion.controllers', [])
             $scope.closeDetail();
         }
 
+        //Initialize the comment
+        $scope.comment = {};
+
         // Create the dish comment modal that we will use later
         $ionicModal.fromTemplateUrl('templates/dish-comment.html', {
           scope: $scope
@@ -202,19 +205,21 @@ angular.module('conFusion.controllers', [])
         });
 
         // Triggered in the dish comment modal to close it
-        $scope.closeDetail = function() {
+        $scope.closeComment = function() {
           $scope.commentform.hide();
         };
 
         // Open the dish comment modal
-        $scope.detailPopup = function() {
+        $scope.commentPopup = function() {
           $scope.commentform.show();
         };
         
         // Adds comment to dish
         $scope.addComment = function () {
-            favoriteFactory.addToFavorites($scope.dish.id);
+            console.log($scope.dish.comments)
+            console.log($scope.comment)
             $scope.closeDetail();
+            $scope.closeComment();
         }
     }])
 
@@ -256,11 +261,10 @@ angular.module('conFusion.controllers', [])
           $scope.promotion = menuFactory.getPromotion().get({id:0});
     }])
 
-    .controller('AboutController', ['$scope', 'corporateFactory','baseURL' , function($scope, corporateFactory, baseURL) {
-                
-                $scope.baseURL = baseURL; 
-                $scope.leaders = corporateFactory.query();
-                console.log($scope.leaders);
+    .controller('AboutController', ['$scope', 'corporateFactory','baseURL' , function($scope, corporateFactory, baseURL) {        
+        $scope.baseURL = baseURL; 
+        $scope.leaders = corporateFactory.query();
+        console.log($scope.leaders);
         
     }])
     .controller('FavoritesController', ['$scope', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading', '$timeout', function ($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout) {
