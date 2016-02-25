@@ -161,6 +161,17 @@ angular.module('conFusion.controllers', [])
         $scope.showDish = false;
         $scope.message="Loading ...";
 
+        $scope.dish = menuFactory.get({id:parseInt($stateParams.id,10)})
+        .$promise.then(
+                        function(response){
+                            $scope.dish = response;
+                            $scope.showDish = true;
+                        },
+                        function(response) {
+                            $scope.message = "Error: "+response.status + " " + response.statusText;
+                        }
+        );
+
         // Create the dish detail modal that we will use later
         $ionicModal.fromTemplateUrl('templates/dish-detail-popover.html', {
           scope: $scope
@@ -281,6 +292,17 @@ angular.module('conFusion.controllers', [])
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner> Loading...'
         });
+
+        $scope.dish = menuFactory.get({id:parseInt($stateParams.id,10)})
+        .$promise.then(
+                        function(response){
+                            $scope.dish = response;
+                            $scope.showDish = true;
+                        },
+                        function(response) {
+                            $scope.message = "Error: "+response.status + " " + response.statusText;
+                        }
+        );
 
         $scope.toggleDelete = function () {
             $scope.shouldShowDelete = !$scope.shouldShowDelete;
