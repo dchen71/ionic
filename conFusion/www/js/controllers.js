@@ -268,29 +268,18 @@ angular.module('conFusion.controllers', [])
         console.log($scope.leaders);
         
     }])
-    .controller('FavoritesController', ['$scope', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading', '$timeout', function ($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout) {
+    .controller('FavoritesController', ['$scope', 'dishes', 'favorites', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading', '$timeout', function ($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout) {
+
         $scope.baseURL = baseURL;
         $scope.shouldShowDelete = false;
 
+        $scope.favorites = favorites;
+
+        $scope.dishes = dishes;
+        
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner> Loading...'
         });
-
-        $scope.favorites = favoriteFactory.getFavorites();
-
-        $scope.dishes = menuFactory.getDishes().query(
-            function (response) {
-                $scope.dishes = response;
-                $timeout(function () {
-                    $ionicLoading.hide();
-                }, 1000);
-            },
-            function (response) {
-                $scope.message = "Error: " + response.status + " " + response.statusText;
-                $timeout(function () {
-                    $ionicLoading.hide();
-                }, 1000);
-            });
 
         $scope.toggleDelete = function () {
             $scope.shouldShowDelete = !$scope.shouldShowDelete;
