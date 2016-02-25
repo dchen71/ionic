@@ -86,7 +86,7 @@ angular.module('conFusion.controllers', [])
         $scope.showMenu = false;
         $scope.message = "Loading ...";
         
-        menuFactory.getDishes().query(
+        menuFactory.query(
             function(response) {
                 $scope.dishes = response;
                 $scope.showMenu = true;
@@ -224,7 +224,7 @@ angular.module('conFusion.controllers', [])
             console.log($scope.mycomment);
             
             $scope.dish.comments.push($scope.mycomment);
-            menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
+            menuFactory.update({id:$scope.dish.id},$scope.dish);
             
             $scope.commentForm.$setPristine();
             
