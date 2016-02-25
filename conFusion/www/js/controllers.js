@@ -154,22 +154,12 @@ angular.module('conFusion.controllers', [])
         };
     }])
 
-    .controller('DishDetailController', ['$scope', '$stateParams', '$ionicModal', 'menuFactory', 'favoriteFactory', 'baseURL', function($scope, $stateParams, $ionicModal, menuFactory, favoriteFactory, baseURL) {
-        $scope.baseURL = baseURL;    
-        $scope.dish = {};
+    .controller('DishDetailController', ['$scope', '$stateParams', 'dish', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicPopover', '$ionicModal', function ($scope, $stateParams, dish, menuFactory, favoriteFactory, baseURL, $ionicPopover, $ionicModal) {
+        $scope.baseURL = baseURL;
+        $scope.dish = dish;
+
         $scope.showDish = false;
         $scope.message="Loading ...";
-        
-        $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id,10)})
-        .$promise.then(
-                        function(response){
-                            $scope.dish = response;
-                            $scope.showDish = true;
-                        },
-                        function(response) {
-                            $scope.message = "Error: "+response.status + " " + response.statusText;
-                        }
-        );
 
         // Create the dish detail modal that we will use later
         $ionicModal.fromTemplateUrl('templates/dish-detail-popover.html', {
@@ -276,7 +266,7 @@ angular.module('conFusion.controllers', [])
         $scope.favorites = favorites;
 
         $scope.dishes = dishes;
-        
+
         $ionicLoading.show({
             template: '<ion-spinner></ion-spinner> Loading...'
         });
