@@ -95,6 +95,9 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
         resolve: {
           leader: ['corporateFactory', function(corporateFactory){
             return corporateFactory.get({id:3})
+          }],
+          promotion: ['promotionFactory', function(promotionFactory){
+            return promotionFactory.get({id:0})
           }]
         }
       }
