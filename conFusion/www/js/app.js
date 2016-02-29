@@ -60,7 +60,7 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
         }
       },
       resolve: {
-
+        //need leaders
       }
     })
   .state('app.menu', {
@@ -72,7 +72,7 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
         }
       },
       menu: {
-        
+        //need all the dishes
       }
     })
 
@@ -91,10 +91,12 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
     views: {
       'mainContent': {
         templateUrl: 'templates/home.html',
-          controller: 'IndexController'
-      },
-      resolve: {
-        
+          controller: 'IndexController',
+        resolve: {
+          leader: ['corporateFactory', function(corporateFactory){
+            return corporateFactory.get({id:3})
+          }]
+        }
       }
     }
   })
