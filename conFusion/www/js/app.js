@@ -103,6 +103,9 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
           }],
           promotion: ['promotionFactory', function(promotionFactory){
             return promotionFactory.get({id:0})
+          }],
+          dish: ['menuFactory', function(menuFactory){
+            return menuFactory.get({id:0})
           }]
         }
       }
