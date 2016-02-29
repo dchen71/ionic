@@ -61,6 +61,9 @@ angular.module('conFusion', ['ionic', 'conFusion.controllers','conFusion.service
       },
       resolve: {
         //need leaders
+        leaders: ['corporateFactory', function(corporateFactory){
+          return corporateFactory.query()
+        }]
       }
     })
   .state('app.menu', {

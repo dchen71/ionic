@@ -271,10 +271,9 @@ angular.module('conFusion.controllers', [])
 
     }])
 
-    .controller('AboutController', ['$scope', 'corporateFactory','baseURL' , function($scope, corporateFactory, baseURL) {        
+    .controller('AboutController', ['$scope', 'leaders', 'corporateFactory','baseURL' , function($scope, leaders, corporateFactory, baseURL) {        
         $scope.baseURL = baseURL; 
-        $scope.leaders = corporateFactory.query();
-        console.log($scope.leaders);
+        $scope.leaders = leaders;
         
     }])
     .controller('FavoritesController', ['$scope', 'dishes', 'favorites', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPopup', '$ionicLoading', '$timeout', function ($scope, dishes, favorites, favoriteFactory, baseURL, $ionicListDelegate, $ionicPopup, $ionicLoading, $timeout) {
