@@ -72,7 +72,7 @@ angular.module('conFusion.controllers', [])
       };  
     })
 
-    .controller('MenuController', ['$scope', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate', function ($scope, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
+    .controller('MenuController', ['$scope', 'dishes', 'menuFactory', 'favoriteFactory', 'baseURL', '$ionicListDelegate', function ($scope, dishes, menuFactory, favoriteFactory, baseURL, $ionicListDelegate) {
         
         $scope.addFavorite = function (index) {
             console.log("index is " + index);
@@ -87,6 +87,9 @@ angular.module('conFusion.controllers', [])
         $scope.showMenu = false;
         $scope.message = "Loading ...";
         
+
+        $scope.dishes = dishes;
+
         menuFactory.query(
             function(response) {
                 $scope.dishes = response;
