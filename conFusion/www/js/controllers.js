@@ -2,7 +2,7 @@
 
 angular.module('conFusion.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage) {
+    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $ionicPlatform, $cordovaCamera) {
     
       // With the new view caching in Ionic, Controllers are only called
       // when they are recreated or on app start, instead of every page change.
@@ -69,7 +69,38 @@ angular.module('conFusion.controllers', [])
         $timeout(function() {
           $scope.closeReserve();
         }, 1000);
-      };  
+      }; 
+
+      //Init registration
+      $scope.registration = {}; 
+
+      // Create the registration modal that we will use later
+      $ionicModal.fromTemplateUrl('templates/register.html', {
+          scope: $scope
+      }).then(function (modal) {
+          $scope.registerform = modal;
+      });
+
+      // Triggered in the registration modal to close it
+      $scope.closeRegister = function () {
+          $scope.registerform.hide();
+      };
+
+      // Open the registration modal
+      $scope.register = function () {
+          $scope.registerform.show();
+      };
+
+      // Perform the registration action when the user submits the registration form
+      $scope.doRegister = function () {
+          console.log('Doing reservation', $scope.reservation);
+
+          // Simulate a registration delay. Remove this and replace with your registration
+          // code if using a registration system
+          $timeout(function () {
+              $scope.closeRegister();
+          }, 1000);
+      };
     })
 
     .controller('MenuController', ['$scope', 'dishes', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPlatform', '$cordovaLocalNotification', '$cordovaToast', function ($scope, dishes, favoriteFactory, baseURL, $ionicListDelegate, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
