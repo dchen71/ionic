@@ -11,6 +11,31 @@ angular.module('conFusion.controllers', [])
       //$scope.$on('$ionicView.enter', function(e) {
       //});
     
+      //Use camera
+      $ionicPlatform.ready(function() {
+          var options = {
+              quality: 50,
+              destinationType: Camera.DestinationType.DATA_URL,
+              sourceType: Camera.PictureSourceType.CAMERA,
+              allowEdit: true,
+              encodingType: Camera.EncodingType.JPEG,
+              targetWidth: 100,
+              targetHeight: 100,
+              popoverOptions: CameraPopoverOptions,
+              saveToPhotoAlbum: false
+          };
+           $scope.takePicture = function() {
+              $cordovaCamera.getPicture(options).then(function(imageData) {
+                  $scope.registration.imgSrc = "data:image/jpeg;base64," + imageData;
+              }, function(err) {
+                  console.log(err);
+              });
+
+              $scope.registerform.show();
+
+          };
+      });
+    
       // Form data for the login modal
       $scope.loginData = $localStorage.getObject('userinfo','{}');
     
@@ -102,29 +127,7 @@ angular.module('conFusion.controllers', [])
           }, 1000);
       };
 
-      $ionicPlatform.ready(function() {
-          var options = {
-              quality: 50,
-              destinationType: Camera.DestinationType.DATA_URL,
-              sourceType: Camera.PictureSourceType.CAMERA,
-              allowEdit: true,
-              encodingType: Camera.EncodingType.JPEG,
-              targetWidth: 100,
-              targetHeight: 100,
-              popoverOptions: CameraPopoverOptions,
-              saveToPhotoAlbum: false
-          };
-           $scope.takePicture = function() {
-              $cordovaCamera.getPicture(options).then(function(imageData) {
-                  $scope.registration.imgSrc = "data:image/jpeg;base64," + imageData;
-              }, function(err) {
-                  console.log(err);
-              });
-
-              $scope.registerform.show();
-
-          };
-      });
+      
 
       
     })
